@@ -1,48 +1,37 @@
-function Drawer() {
+function Drawer({onClose, items = []}) {
   return (
-    <div className="overlay" style={{ display: "none" }}>
+    <div className="overlay">
       <div className="drawer d-flex flex-column">
         <h2 className="mb-30 d-flex justify-between">
           Корзина
           <img
+            onClick={onClose}
             className="removeBtn"
             src="/img/remove-sneakers.svg"
-            alt="Удаление"
+            alt="Закрытие"
           />
         </h2>
 
         <div className="items">
-          <div className="cartItem d-flex align-center mb-20">
-            <div
-              className="cartImage"
-              style={{ backgroundImage: "url(/img/sneakers/2.jpg)" }}
-            ></div>
-            <div className="cartInfo mr-20">
-              <p>Мужские Кроссовки Nike Air Max 270</p>
-              <b>12 999 руб.</b>
-            </div>
-            <img
-              className="removeBtn"
-              src="/img/remove-sneakers.svg"
-              alt="Удаление"
-            />
-          </div>
 
-          <div className="cartItem d-flex align-center">
-            <div
-              className="cartImage"
-              style={{ backgroundImage: "url(/img/sneakers/2.jpg)" }}
-            ></div>
-            <div className="cartInfo mr-20">
-              <p>Мужские Кроссовки Nike Air Max 270</p>
-              <b>12 999 руб.</b>
+          {items.map((obj) => (
+            <div className="cartItem d-flex align-center mb-20">
+              <div
+                className="cartImage"
+                style={{ backgroundImage: `url(${obj.imageUrl})` }}
+              ></div>
+              <div className="cartInfo mr-20">
+                <p>{obj.title}</p>
+                <b>{obj.price} руб.</b>
+              </div>
+              <img
+                className="removeBtn"
+                src="/img/remove-sneakers.svg"
+                alt="Удаление"
+              />
             </div>
-            <img
-              className="removeBtn"
-              src="/img/remove-sneakers.svg"
-              alt="Удаление"
-            />
-          </div>
+          ))}
+
         </div>
 
         <div className="price d-flex flex-column">
