@@ -1,9 +1,18 @@
 import React from "react";
 import styles from "./Card.module.scss";
 
-function Card({ title, price, imageUrl, cardId, onPlus, onFavorite }) {
+function Card({
+  title,
+  price,
+  imageUrl,
+  id,
+  onPlus,
+  onFavorite,
+  favorited = false,
+}) {
   const [plusImageUrl, setPlusImageUrl] = React.useState("/img/plus.svg");
   const [isBtnChecked, setBtnIsChecked] = React.useState(false);
+  const [isFavorite, setIsFavorite] = React.useState(favorited);
 
   React.useEffect(() => {
     if (!isBtnChecked) {
@@ -13,8 +22,14 @@ function Card({ title, price, imageUrl, cardId, onPlus, onFavorite }) {
     }
   }, [isBtnChecked]);
 
+  const onClickFavorite = () => {
+    console.log(id)
+    onFavorite({ title, price, imageUrl, id });
+    setIsFavorite(!isFavorite);
+  };
+
   const onClickPlus = () => {
-    onPlus({title, price, imageUrl, cardId});
+    onPlus({ title, price, imageUrl, id });
     setBtnIsChecked(!isBtnChecked);
   };
 
@@ -22,8 +37,8 @@ function Card({ title, price, imageUrl, cardId, onPlus, onFavorite }) {
     <div className={styles.card}>
       <div className={styles.favorite}>
         <img
-          onClick={onFavorite}
-          src="/img/heart-liked.svg"
+          onClick={onClickFavorite}
+          src={isFavorite ? "/img/heart-liked.svg" : "/img/heart-unliked.svg"}
           alt="Отсутствие лайка"
         />
       </div>

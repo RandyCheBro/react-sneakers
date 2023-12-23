@@ -41,9 +41,24 @@ header {
   }
 
   .search-block {
+    position: relative;
     border-radius: 10px;
     border: 1px solid #F3F3F3;
     padding: 0 15px;
+
+    .clear {
+      position: absolute;
+      width: 27px;
+      height: 27px;
+      right: 10px;
+      top: 6px;
+      cursor: pointer;
+      transition: opacity 0.15s ease-in-out;
+
+      &:hover {
+        opacity: 0.7;
+      }
+    }
 
     input {
       border: 0;
@@ -52,130 +67,60 @@ header {
       width: 200px;
     }
   }
+
+  .cardTable {
+    gap: 30px 40px;
+  }
 }
 
-.overlay {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 1;
-}
+.greenBtn {
+  position: relative;
+  align-self: center;
+  width: 325px;
+  height: 55px;
+  color: #FFF;
+  margin-top: 24px;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 18px;
+  border: none;
+  background: #9DD458;
+  cursor: pointer;
+  transition: background 0.1 ease-in-out;
 
-.drawer {
-  position: absolute;
-  width: 420px;
-  right: 0;
-  height: 100%;
-  padding: 30px;
-  background: #FFF;
-  box-shadow: -10px 4px 24px 0px rgba(0, 0, 0, 0.10);
-
-  h2 {
-    margin: 0;
-  }
-
-  .items {
-    flex: 1;
-    overflow: auto;
-    margin-bottom: 40px;
-  }
-
-  .cartItem {
-    padding: 30px 20px 20px;
-    border-radius: 20px;
-    border: 1px solid #F3F3F3;
-    overflow: hidden;
-
-    .cartImage {
-      width: 70px;
-      height: 70px;
-      margin-right: 20px;
-      background-size: contain;
-      background-position: 0 -3px;
-      background-repeat: no-repeat;
-    }
-
-    .cartInfo {
-      max-width: 176px;
-
-      p {
-        font-size: 16px;
-        margin: 0 0 8px;
-      }
-
-      b {
-        font-size: 14px;
-      }
-    }
-
-    img {
-      margin-top: 35px;
-    }
-  }
-
-  .removeBtn {
-    opacity: 0.5;
-    cursor: pointer;
-    transition: opacity 0.15s ease-in-out;
-
-    &:hover {
-      opacity: 1;
-    }
-  }
-
-  .price {
-
-    p {
-      margin: 0;
-    }
-
-    .dashedBorder {
-      border: 1px dashed #DFDFDF;
-      flex: 1;
-      position: relative;
-      top: -2px;
-      align-self: flex-end;
-      margin: 0 7px;
-    }
-
-    .greenBtn {
-      position: relative;
-      align-self: center;
-      width: 325px;
-      height: 55px;
-      color: #FFF;
-      margin-top: 24px;
-      text-align: center;
-      font-size: 16px;
-      font-weight: 600;
-      border-radius: 18px;
-      border: none;
-      background: #9DD458;
-      cursor: pointer;
-      transition: background 0.1 ease-in-out;
-
-      &:hover {
-        background: lighten(#9DD458, 5%);
-
-        img {
-          transform: translateX(5px);
-
-        }
-      }
-
-      &:active {
-        background: darken(#9DD458, 5%);
-      }
-    }
+  &:hover {
+    background: lighten(#9DD458, 5%);
 
     .imgArrow {
-      position: absolute;
-      top: 22px;
-      right: 30px;
-      transition: transform 0.15s ease-in-out;
+      transform: translateX(5px);
+
+    }
+
+    .imgLeftArrow {
+      transform: translateX(-5px);
     }
   }
+
+  &:active {
+    background: darken(#9DD458, 5%);
+  }
+
+  .imgArrow {
+    position: absolute;
+    top: 22px;
+    right: 30px;
+    transition: transform 0.15s ease-in-out;
+  }
+
+  .imgLeftArrow {
+    position: absolute;
+    top: 22px;
+    left: 30px;
+    transition: transform 0.15s ease-in-out;
+  }
+}
+
+.greenBtn_short_width {
+  width: 250px;
 }
