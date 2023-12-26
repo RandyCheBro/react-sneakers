@@ -1,4 +1,6 @@
 .card {
+  display: flex;
+  flex-direction: column;
   width: 220px;
   border-radius: 40px;
   border: 1px solid #F3F3F3;
@@ -10,14 +12,18 @@
     transform: translateY(-5px);
   }
 
+  .imgSneakers {
+    align-self: center;
+  }
+
   .favorite {
     position: absolute;
     cursor: pointer;
 
-    img{
+    img {
       opacity: 1;
 
-      &:hover{
+      &:hover {
         opacity: 0.7;
       }
     }
@@ -59,4 +65,9 @@
   .button_background_green {
     background: linear-gradient(180deg, #89F09C 0%, #3CC755 100%);
   }
+
+}
+
+.cardPreloading {
+  padding: 0;
 }

@@ -7,7 +7,23 @@ function Home({
   onChangeSearchInput,
   onAddtoCart,
   onFavorite,
+  isLoading,
 }) {
+  const renderItems = () => {
+    const filteredItems = items.filter((item) =>
+      item.title.toLowerCase().includes(searchValue.toLowerCase())
+    );
+    return (isLoading ? [...Array(8)] : filteredItems).map((item, index) => (
+      <Card
+        key={index}
+        onPlus={onAddtoCart}
+        onFavorite={onFavorite}
+        loading={isLoading}
+        {...item}
+      />
+    ));
+  };
+
   return (
     <div className="content p-40">
       <div className="d-flex justify-between align-center mb-40">
@@ -33,20 +49,7 @@ function Home({
           ></input>
         </div>
       </div>
-      <div className="cardTable d-flex flex-wrap">
-        {items
-          .filter((item) =>
-            item.title.toLowerCase().includes(searchValue.toLowerCase())
-          )
-          .map((item, index) => (
-            <Card
-              key={index}
-              onPlus={onAddtoCart}
-              onFavorite={onFavorite}
-              {...item}
-            />
-          ))}
-      </div>
+      <div className="cardTable d-flex flex-wrap">{renderItems()}</div>
     </div>
   );
 }

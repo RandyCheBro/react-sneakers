@@ -3,11 +3,14 @@ import styles from "./Favorites.module.scss";
 import { Link } from "react-router-dom";
 
 import Card from "../../components/Card/Card";
+import { AppContext } from "../../contexts/AppContext";
 
-function Favorites({ items, onPlus, onFavorite }) {
+function Favorites({ onPlus, onFavorite, isLoading }) {
+  const { favorites } = React.useContext(AppContext);
+
   return (
     <section className={styles.favorites}>
-      {items.length === 0 ? (
+      {favorites.length === 0 ? (
         <div className={styles.emptyBlock}>
           <div className="d-flex flex-column align-center">
             <img width={70} src="/img/sat-smile.png" alt="Грустный смайл" />
@@ -34,12 +37,12 @@ function Favorites({ items, onPlus, onFavorite }) {
             <h1>Мои закладки</h1>
           </div>
           <div className={styles.cardTable}>
-            {items.map((item, index) => (
+            {favorites.map((item, index) => (
               <Card
                 key={index}
                 onPlus={onPlus}
                 onFavorite={onFavorite}
-                favorited={true}
+                loading={isLoading}
                 {...item}
               />
             ))}
