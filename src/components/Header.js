@@ -17,7 +17,7 @@ function Header(props) {
 
   return (
     <header className="d-flex justify-between align-center p-40">
-      <Link to="/">
+      <Link to="">
         <div className="d-flex align-center">
           <img width={40} height={40} src="img/logo.png" alt="логотип" />
           <div>
@@ -42,10 +42,10 @@ function Header(props) {
           />
           <span>{totalPrice} руб.</span>
         </li>
-        <Link to="/favorites">
+        <Link to="favorites">
           <li
             className={`mr-30 cu-p d-flex align-center ${
-              pathname === "/favorites" && "activeNav"
+              pathname === "favorites" && "activeNav"
             }`}
           >
             <img
@@ -58,10 +58,10 @@ function Header(props) {
             <span>Закладки</span>
           </li>
         </Link>
-        <Link to="/orders">
+        <Link to="orders">
           <li
             className={`d-flex cu-p align-center ${
-              pathname === "/orders" && "activeNav"
+              pathname === "orders" && "activeNav"
             }`}
           >
             <img

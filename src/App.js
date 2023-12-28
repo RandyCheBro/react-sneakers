@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, /* Navigate */  } from "react-router-dom";
 
 import Header from "./components/Header";
 import Drawer from "./components/Drawer/Drawer";
@@ -127,11 +127,9 @@ function App() {
         />
         <Header onClickOpenCart={() => setIsCartOpened(true)} />
         <Routes>
-          <Route path="favorites" element={<Favorites />} />
-
+          <Route path="/favorites" element={<Favorites />} />
           <Route
-            path=""
-            exact
+            path="/"
             element={
               <Home
                 searchValue={searchValue}
@@ -140,8 +138,8 @@ function App() {
               />
             }
           />
-
-          <Route path="orders" element={<Orders />} />
+          <Route path="/orders" element={<Orders />} />
+          {/* <Route path="*" element={<Navigate to="" />} /> */}
         </Routes>
       </div>
     </AppContext.Provider>

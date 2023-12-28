@@ -34,6 +34,8 @@ function Home({ searchValue, setSearchValue, onChangeSearchInput }) {
           )}
           <input
             value={searchValue}
+            name="search"
+            type="text"
             onChange={onChangeSearchInput}
             placeholder="Поиск..."
           ></input>
