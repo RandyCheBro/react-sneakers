@@ -127,10 +127,11 @@ function App() {
         />
         <Header onClickOpenCart={() => setIsCartOpened(true)} />
         <Routes>
-          <Route path="favorites" element={<Favorites />}></Route>
+          <Route path="favorites" element={<Favorites />} />
 
           <Route
-            path="/"
+            path=""
+            exact
             element={
               <Home
                 searchValue={searchValue}
@@ -138,9 +139,9 @@ function App() {
                 onChangeSearchInput={onChangeSearchInput}
               />
             }
-          ></Route>
+          />
 
-          <Route path="orders" element={<Orders />}></Route>
+          <Route path="orders" element={<Orders />} />
         </Routes>
       </div>
     </AppContext.Provider>
