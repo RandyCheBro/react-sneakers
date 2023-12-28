@@ -2,26 +2,19 @@ import React from "react";
 import styles from "./Card.module.scss";
 import ContentLoader from "react-content-loader";
 import { AppContext } from "../../contexts/AppContext";
+import { useLocation } from "react-router-dom";
 
-
-function Card({
-  title,
-  price,
-  imageUrl,
-  id,
-  cardId,
-  onPlus,
-  onFavorite,
-  loading,
-}) {
-  const {addedToCart, addedToFavorite} = React.useContext(AppContext)
+function Card({ title, price, imageUrl, id, cardId, loading }) {
+  const { addedToCart, addedToFavorite, onAddToFavorite, onAddtoCart } =
+    React.useContext(AppContext);
+  const { pathname } = useLocation();
 
   const onClickFavorite = () => {
-    onFavorite({ title, price, imageUrl, id, cardId });
+    onAddToFavorite({ title, price, imageUrl, id, cardId });
   };
 
   const onClickPlus = () => {
-    onPlus({ title, price, imageUrl, id, cardId });
+    onAddtoCart({ title, price, imageUrl, id, cardId });
   };
 
   return (
@@ -34,7 +27,6 @@ function Card({
           viewBox="0 0 210 260"
           backgroundColor="#F3F3F3"
           foregroundColor="#E7F6FF"
-          /* {...props} */
         >
           <rect x="30" y="144" rx="3" ry="3" width="150" height="15" />
           <rect x="30" y="36" rx="10" ry="10" width="150" height="91" />
@@ -45,13 +37,17 @@ function Card({
       ) : (
         <>
           <div className={styles.favorite}>
-            <img
-              onClick={onClickFavorite}
-              src={
-                addedToFavorite(cardId) ? "/img/heart-liked.svg" : "/img/heart-unliked.svg"
-              }
-              alt="Отсутствие лайка"
-            />
+            {pathname !== "/orders" && (
+              <img
+                onClick={onClickFavorite}
+                src={
+                  addedToFavorite(cardId)
+                    ? "img/heart-liked.svg"
+                    : "img/heart-unliked.svg"
+                }
+                alt="Отсутствие лайка"
+              />
+            )}
           </div>
           <img
             className={styles.imgSneakers}
@@ -66,14 +62,23 @@ function Card({
               <span>Цена:</span>
               <b>{price} руб.</b>
             </div>
-            <button
-              onClick={onClickPlus}
-              className={`${styles.button} ${
-                addedToCart(cardId) ? styles.button_background_green : ""
-              }`}
-            >
-              <img src={addedToCart(cardId)? "/img/btn-checked.svg": "/img/plus.svg"} alt="плюс" />
-            </button>
+            {pathname !== "/orders" && (
+              <button
+                onClick={onClickPlus}
+                className={`${styles.button} ${
+                  addedToCart(cardId) ? styles.button_background_green : ""
+                }`}
+              >
+                <img
+                  src={
+                    addedToCart(cardId)
+                      ? "img/btn-checked.svg"
+                      : "img/plus.svg"
+                  }
+                  alt="плюс"
+                />
+              </button>
+            )}
           </div>
         </>
       )}

@@ -1,26 +1,16 @@
+import React from "react";
 import Card from "../components/Card/Card";
+import { AppContext } from "../contexts/AppContext";
 
-function Home({
-  items,
-  searchValue,
-  setSearchValue,
-  onChangeSearchInput,
-  onAddtoCart,
-  onFavorite,
-  isLoading,
-}) {
+function Home({ searchValue, setSearchValue, onChangeSearchInput }) {
+  const { isLoading, items } = React.useContext(AppContext);
+
   const renderItems = () => {
     const filteredItems = items.filter((item) =>
       item.title.toLowerCase().includes(searchValue.toLowerCase())
     );
     return (isLoading ? [...Array(8)] : filteredItems).map((item, index) => (
-      <Card
-        key={index}
-        onPlus={onAddtoCart}
-        onFavorite={onFavorite}
-        loading={isLoading}
-        {...item}
-      />
+      <Card key={index} loading={isLoading} {...item} />
     ));
   };
 
@@ -31,14 +21,14 @@ function Home({
           {searchValue ? `Поиск по запросу: "${searchValue}"` : "Все кроссовки"}
         </h1>
         <div className="search-block d-flex">
-          <img src="/img/search.svg" alt="Поиск" />
+          <img src="img/search.svg" alt="Поиск" />
           {searchValue && (
             <img
               onClick={() => {
                 setSearchValue("");
               }}
               className="clear"
-              src="/img/remove-sneakers.svg"
+              src="img/remove-sneakers.svg"
               alt="Отчистка инпута"
             />
           )}

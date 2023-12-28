@@ -14,7 +14,7 @@ function Info({ isOrderComplete, title, descripton, image }) {
         Вернуться назад
         <img
           className="imgLeftArrow"
-          src="/img/arrow-left.svg"
+          src="img/arrow-left.svg"
           alt="Стрелочка"
         />
       </button>

@@ -5,15 +5,15 @@ import { Link } from "react-router-dom";
 import Card from "../../components/Card/Card";
 import { AppContext } from "../../contexts/AppContext";
 
-function Favorites({ onPlus, onFavorite, isLoading }) {
-  const { favorites } = React.useContext(AppContext);
+function Favorites() {
+  const { favorites, isLoading } = React.useContext(AppContext);
 
   return (
     <section className={styles.favorites}>
       {favorites.length === 0 ? (
         <div className={styles.emptyBlock}>
           <div className="d-flex flex-column align-center">
-            <img width={70} src="/img/sat-smile.png" alt="Грустный смайл" />
+            <img width={70} src="img/sat-smile.png" alt="Грустный смайл" />
             <h3>Закладок нет :(</h3>
             <p>Вы ничего не добавляли в закладки</p>
             <Link to="/">
@@ -21,7 +21,7 @@ function Favorites({ onPlus, onFavorite, isLoading }) {
                 Вернуться назад
                 <img
                   className="imgLeftArrow"
-                  src="/img/arrow-left.svg"
+                  src="img/arrow-left.svg"
                   alt="Стрелочка"
                 />
               </button>
@@ -32,7 +32,7 @@ function Favorites({ onPlus, onFavorite, isLoading }) {
         <>
           <div className="d-flex">
             <Link to="/">
-              <img src="/img/left-small-arrow.svg" alt="Назад"></img>
+              <img src="img/left-small-arrow.svg" alt="Назад"></img>
             </Link>
             <h1>Мои закладки</h1>
           </div>
@@ -40,8 +40,6 @@ function Favorites({ onPlus, onFavorite, isLoading }) {
             {favorites.map((item, index) => (
               <Card
                 key={index}
-                onPlus={onPlus}
-                onFavorite={onFavorite}
                 loading={isLoading}
                 {...item}
               />

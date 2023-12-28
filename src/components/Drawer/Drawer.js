@@ -3,15 +3,15 @@ import React from "react";
 import axios from "axios";
 import styles from "./Drawer.module.scss";
 import Info from "../Info/Info";
-import { AppContext } from "../../contexts/AppContext";
+import { useCart } from "../hooks/useCart";
 
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
-function Drawer({ onClose, items, removeCartItems }) {
+function Drawer({ onClose, items, removeCartItems, opened }) {
   const [isOrderComplete, setIsOrderComplete] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(false);
   const [orderId, setOrderId] = React.useState(null);
-  const { cartItems, setCartItems } = React.useContext(AppContext);
+  const { totalPrice, cartItems, setCartItems } = useCart();
 
   const onClickOrder = async () => {
     try {
@@ -38,14 +38,14 @@ function Drawer({ onClose, items, removeCartItems }) {
   };
 
   return (
-    <div className={styles.overlay}>
+    <div className={`${styles.overlay} ${opened? styles.overlayVisible: ''}`}>
       <div className={`${styles.drawer} d-flex flex-column`}>
         <h2 className="mb-30 d-flex justify-between">
           Корзина
           <img
             onClick={onClose}
             className={styles.removeBtn}
-            src="/img/remove-sneakers.svg"
+            src="img/remove-sneakers.svg"
             alt="Закрытие"
           />
         </h2>
@@ -58,7 +58,7 @@ function Drawer({ onClose, items, removeCartItems }) {
                 ? `Ваш заказ #${orderId} скоро будет передан курьерской доставке`
                 : "Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ."
             }
-            image={isOrderComplete ? "/img/complete-order.png" : "/img/box.png"}
+            image={isOrderComplete ? "img/complete-order.png" : "img/box.png"}
           />
         ) : (
           <div className={`${styles.container} d-flex flex-column`}>
@@ -81,7 +81,7 @@ function Drawer({ onClose, items, removeCartItems }) {
                       removeCartItems(obj.id);
                     }}
                     className={styles.removeBtn}
-                    src="/img/remove-sneakers.svg"
+                    src="img/remove-sneakers.svg"
                     alt="Удаление"
                   />
                 </div>
@@ -92,13 +92,13 @@ function Drawer({ onClose, items, removeCartItems }) {
                 <li className="d-flex align-center mb-20">
                   <p>Итого:</p>
                   <div className={styles.dashedBorder}></div>
-                  <b>21 498 руб.</b>
+                  <b>{totalPrice} руб.</b>
                 </li>
 
                 <li className="d-flex align-center">
                   <p>Налог 5%:</p>
                   <div className={styles.dashedBorder}></div>
-                  <b>1074 руб.</b>
+                  <b>{Math.round(totalPrice * 0.05)} руб.</b>
                 </li>
               </ul>
               <button
@@ -109,7 +109,7 @@ function Drawer({ onClose, items, removeCartItems }) {
                 Оформить заказ
                 <img
                   className="imgArrow"
-                  src="/img/arrow.svg"
+                  src="img/arrow.svg"
                   alt="Стрелочка"
                 />
               </button>
