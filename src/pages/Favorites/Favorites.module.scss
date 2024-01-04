@@ -3,9 +3,10 @@
   min-height: 77vh;
 
   .cardTable {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    justify-items: center;
     gap: 30px 40px;
-    display: flex;
-    flex-wrap: wrap;
   }
 
   h1 {

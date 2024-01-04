@@ -41,7 +41,7 @@ function Home({ searchValue, setSearchValue, onChangeSearchInput }) {
           ></input>
         </div>
       </div>
-      <div className="cardTable d-flex flex-wrap">{renderItems()}</div>
+      <div className="cardTable">{renderItems()}</div>
     </div>
   );
 }
